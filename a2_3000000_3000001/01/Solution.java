@@ -7,10 +7,8 @@
  */
 public class Solution {
 
-
-    // Your variables here
-
-
+	private int width, height, size;
+    
     /**
      * Constructor. Creates an instance of Solution 
      * for a board of size <b>widthxheight</b>. That 
@@ -24,7 +22,9 @@ public class Solution {
      */
     public Solution(int width, int height) {
 
-        //Your code here
+        this.width = width;
+        this.height = height;
+        this.size = width*height;
         
     }
 
@@ -75,7 +75,7 @@ public class Solution {
     }
 
     /** 
-    * specifies the ``next'' value of the 
+    * specifies the ''next'' value of the 
     * solution. 
     * The first call to setNext specifies 
     * the value of the board location (1,1), 
