@@ -129,4 +129,4 @@ public class LightsOut {
 
         System.out.println("In a board of "+width+" x "+height+", there are "+solutions.size()+" solutions. ");
     }
-}
+}   
