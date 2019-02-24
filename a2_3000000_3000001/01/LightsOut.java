@@ -4,7 +4,7 @@ import java.util.ArrayList;
 /**
  * The class <b>LightsOut</b> is the
  * class that implements the method to
- * computs solutions of the Lights Out game.
+ * compute solutions of the Lights Out game.
  * It contains the main of our application.
  *
  * @author Guy-Vincent Jourdan, University of Ottawa
@@ -12,9 +12,9 @@ import java.util.ArrayList;
 
 public class LightsOut {
 
-    // Your variables here
-
-
+    private ArrayListSolutionQueue partialSolutions;
+    private ArrayList<Solution> solutions;
+    private Solution sol;
 
     /**
      * The method <b>solve</b> finds all the 
@@ -84,7 +84,6 @@ public class LightsOut {
         } 
 
         return solutions;
-        
     }
 
     /**
@@ -104,7 +103,6 @@ public class LightsOut {
     public static void main(String[] args) {
 
         StudentInfo.display();
-
         int width;
         int height;
 
@@ -127,6 +125,6 @@ public class LightsOut {
             System.out.println(s + "\n********");
         }
 
-        System.out.println("In a board of "+width+" x "+height+", there are "+solutions.size()+" solutions. ");
+        System.out.println("In a board of "+width+" x "+height+", there are "+solutions.size()+" solutions. "); 
     }
 }   
