@@ -15,6 +15,7 @@ public class Solution {
     private int col = 0;
 
     private boolean board [][];
+    private boolean successfulBoard [][];
 
     private int nextCtr = 0;
     private int trueCtr = 0;
@@ -35,6 +36,7 @@ public class Solution {
         this.width = width;
         this.height = height;
         board = new boolean[height][width]; 
+        successfulBoard = new boolean [height][width];
         
     }
 
@@ -48,10 +50,19 @@ public class Solution {
      */
      public Solution(Solution other) {
 
-        this.width = other.width;
-        this.height = other.height;
-        this.board = other.board;
-        Solution copyBoard = new Solution(width,height);
+         this.width = other.width;
+         this.col = other.col;
+         this.row = other.row;
+         this.height = other.height;
+         this.nextCtr = other.nextCtr;
+
+        this.board = new boolean[other.height][other.width];
+        this.successfulBoard = new boolean[other.height][other.width];
+        for (int i = 0; i<height; i++){
+            for (int j = 0; j<height; j++){
+                this.board[i][j] = other.board[i][j];
+            }
+        }
         
     }
 
@@ -152,17 +163,13 @@ public class Solution {
         // repeat with column
         // when max reached, send error message
         // *board[currentheight][currentwidth] = nextvalue*
-        if (col < this.width){
+        if (col < this.width && row < this.height){
             board[row][col] = nextValue;
-            if (nextValue == true){
-                trueCtr++;
-                System.out.println(trueCtr);
-            }
             col++;
             nextCtr++;
         }
 
-        if (col == this.width){
+        if (row<this.height && col >= this.width){
             row++;
             col = 0;
         }      
@@ -181,7 +188,50 @@ public class Solution {
     */
     public boolean isSuccessful(){
 
-        return (trueCtr%2 != 0);
+        for (int i = 0; i<this.height; i++){
+            for (int j = 0; j<this.width; j++){
+
+                boolean step = this.board[i][j];
+
+                if (step == true){
+                    this.successfulBoard[i][j] = !this.successfulBoard[i][j];
+
+                    if (isValid(i+1,j)){
+                        this.successfulBoard[i+1][j] = !this.successfulBoard[i+1][j];
+                    }
+                    if (isValid(i-1,j)){
+                        this.successfulBoard[i-1][j] = !this.successfulBoard[i-1][j];
+                    }
+                    if (isValid(i,j+1)){
+                        this.successfulBoard[i][j+1] = !this.successfulBoard[i][j+1];
+                    }
+                    if (isValid(i,j-1)){
+                        this.successfulBoard[i][j-1] = !this.successfulBoard[i][j-1];
+                    }
+
+                }
+
+            }
+        }
+
+        for (int i = 0; i<this.height; i++){
+            for (int j = 0; j<this.width; j++){
+                if(this.successfulBoard[i][j] == false){
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    private boolean isValid(int i,int j){
+
+        if (i<0 || i>=this.height || j<0 || j>=this.width){
+            return false;
+        }
+
+        return true;
     }
 
 
@@ -194,28 +244,43 @@ public class Solution {
     public String toString() {
  
         //Your code here
-        return "";
+        String boardStr = "";
+        for (int i = 0; i<this.height; i++){
+            boardStr = boardStr + "[";
+            for (int j = 0; j<this.width; j++){
+                boardStr = boardStr + this.board[i][j];
+
+                if (j != (this.width - 1)){
+                    boardStr = boardStr + ",";
+                }
+            }
+
+            boardStr = boardStr + "]\n";
+        }
+
+        return boardStr;
         
     }
 
 
 
-    public static void main (String[] args){
+  //   public static void main (String[] args){
       
-     //Solution testBoard = new Solution(3,2);
-     //Solution testBoardCopy = new Solution(testBoard);
-        Solution testBoard = new Solution(3,3);
-        testBoard.setNext(true);
-        testBoard.setNext(false);
-        testBoard.setNext(true);
-        testBoard.setNext(false);
-        testBoard.setNext(true);
-        testBoard.setNext(false);
-        testBoard.setNext(true);
-        testBoard.setNext(false);
-        testBoard.setNext(true);
-        System.out.println(testBoard.isReady());
-        System.out.println(testBoard.isSuccessful());
-  }
+  //    //Solution testBoard = new Solution(3,2);
+  //    //Solution testBoardCopy = new Solution(testBoard);
+  //       Solution testBoard = new Solution(3,3);
+  //       testBoard.setNext(true);
+  //       testBoard.setNext(false);
+  //       testBoard.setNext(true);
+  //       testBoard.setNext(false);
+  //       testBoard.setNext(true);
+  //       testBoard.setNext(false);
+  //       testBoard.setNext(true);
+  //       testBoard.setNext(false);
+  //       testBoard.setNext(true);
+  //       System.out.println(testBoard.isReady());
+  //       System.out.println(testBoard.isSuccessful());
+  //       System.out.println(testBoard.toString());
+  // }
 
 }

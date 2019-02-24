@@ -23,7 +23,7 @@ public class ArrayListSolutionQueue implements SolutionQueue {
      */
     public ArrayListSolutionQueue() {
 
-        //Your code here
+        queue = new ArrayList<>();
         
     }
 
@@ -35,7 +35,7 @@ public class ArrayListSolutionQueue implements SolutionQueue {
      */
     public void enqueue(Solution value) {
 
-        //Your code here
+        queue.add(value);
         
     }
 
@@ -47,7 +47,13 @@ public class ArrayListSolutionQueue implements SolutionQueue {
      */
     public Solution dequeue() {
 
-        //Your code here
+        if (isEmpty()) {
+
+            return null;
+            
+        }
+        
+        return queue.remove(0);
         
     }
 
@@ -59,7 +65,7 @@ public class ArrayListSolutionQueue implements SolutionQueue {
      */
     public boolean isEmpty() {
 
-        //Your code here
+        return queue.isEmpty();
         
     }
 
