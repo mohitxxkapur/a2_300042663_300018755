@@ -12,9 +12,9 @@ import java.util.ArrayList;
 
 public class LightsOut {
 
-    // Your variables here
-
-
+    private ArrayListSolutionQueue partialSolutions;
+    private ArrayList<Solution> solutions;
+    private Solution sol;
 
     /**
      * The method <b>solve</b> finds all the 
@@ -42,14 +42,14 @@ public class LightsOut {
      */
     public static ArrayList<Solution> solve(int width, int height){
 
-        ArrayListSolutionQueue partialSolutions;
-        ArrayList<Solution> solutions;
-        Solution sol = new Solution(width, height);
+        sol = Solution(width, height);
         partialSolutions.enqueue(sol);
 
         while(partialSolutions.isEmpty() == false){
-            Solution current = partialSolutions.get(0);
-            if(current.isSuccessful() == true){
+
+            Solution current = partialSolutions.dequeue();
+
+            if(current.isSuccessful() == true){                
                 solutions.add(current);
             }
             else{
