@@ -8,7 +8,16 @@
 public class Solution {
 
 
-    // Your variables here
+    private int width;
+    private int height;
+
+    private int row = 0;
+    private int col = 0;
+
+    private boolean board [][];
+
+    private int nextCtr = 0;
+    private int trueCtr = 0;
 
 
     /**
@@ -23,8 +32,10 @@ public class Solution {
      *  the height of the board
      */
     public Solution(int width, int height) {
-
-        //Your code here
+            
+        this.width = width;
+        this.height = height;
+        board = new boolean[height][width]; 
         
     }
 
@@ -38,7 +49,10 @@ public class Solution {
      */
      public Solution(Solution other) {
 
-        //Your code here
+        this.width = other.width;
+        this.height = other.height;
+        this.board = other.board;
+        Solution copyBoard = new Solution(width,height);
         
     }
 
@@ -56,7 +70,41 @@ public class Solution {
 
     public boolean equals(Object other){
 
+        boolean result = false;
+        //boolean result = false;
         //Your code here
+        // check if null
+        // check instanceof solution (this != other getclass)
+        // then check length
+        // this.width & this.height w other.width & other.height
+        // do a for loop
+        if (other == null){
+            result = false;
+        }
+        else if (this.getClass() != other.getClass()){
+            result  = false;
+        }
+
+        else {
+            Solution o = (Solution)other;
+
+            if (this.height != o.height && this.width != o.height){
+                result = false;
+            }
+            else if (this.height == o.height && this.width == o.height){
+                for (int i = 0; i<this.height; i++){
+                    for (int j = 0; j<this.width; j++){
+                        if (this.board[i][j] == o.board[i][j]){
+                            result  = true;
+                        }
+                    }
+                }
+            }
+        }
+
+
+
+        return result;
         
     }
 
@@ -70,7 +118,9 @@ public class Solution {
     */
     public boolean isReady(){
 
-        //Your code here
+        // check that youve gone through every index
+        // return true if counter from setNext = (width*height)
+        return nextCtr == this.width*this.height;
         
     }
 
@@ -93,8 +143,30 @@ public class Solution {
     */
     public void setNext(boolean nextValue) {
 
-        //Your code here
-        
+        // add counter - for isReady
+        // set value of first row first column
+        // column increase
+        // set value first row second colum
+        // column increase
+        // keep this going until max number column reached
+        // move onto next row
+        // repeat with column
+        // when max reached, send error message
+        // *board[currentheight][currentwidth] = nextvalue*
+        if (col < this.width){
+            board[row][col] = nextValue;
+            if (nextValue == true){
+                trueCtr++;
+                System.out.println(trueCtr);
+            }
+            col++;
+            nextCtr++;
+        }
+
+        if (col == this.width){
+            row++;
+            col = 0;
+        }      
     }
     
     /**
@@ -110,9 +182,7 @@ public class Solution {
     */
     public boolean isSuccessful(){
 
-        //Your code here
-        
-
+        return (trueCtr%2 != 0);
     }
 
 
@@ -125,7 +195,28 @@ public class Solution {
     public String toString() {
  
         //Your code here
+        return "";
         
     }
+
+
+
+    public static void main (String[] args){
+      
+     //Solution testBoard = new Solution(3,2);
+     //Solution testBoardCopy = new Solution(testBoard);
+        Solution testBoard = new Solution(3,3);
+        testBoard.setNext(true);
+        testBoard.setNext(false);
+        testBoard.setNext(true);
+        testBoard.setNext(false);
+        testBoard.setNext(true);
+        testBoard.setNext(false);
+        testBoard.setNext(true);
+        testBoard.setNext(false);
+        testBoard.setNext(true);
+        System.out.println(testBoard.isReady());
+        System.out.println(testBoard.isSuccessful());
+  }
 
 }
