@@ -11,10 +11,9 @@ import java.util.ArrayList;
  */
 public class ArrayListSolutionQueue implements SolutionQueue {
 
-
     /**
      * <b>queue</b> stores the references of the elements
-     * currentluy in the queue
+     * currently in the queue
      */
     private ArrayList<Solution> queue;
 
@@ -23,7 +22,7 @@ public class ArrayListSolutionQueue implements SolutionQueue {
      */
     public ArrayListSolutionQueue() {
 
-        //Your code here
+        queue = new ArrayList<Solution>();
         
     }
 
@@ -34,9 +33,8 @@ public class ArrayListSolutionQueue implements SolutionQueue {
      *      The reference to the new element
      */
     public void enqueue(Solution value) {
-
-        //Your code here
         
+        queue.add(value);
     }
 
     /**
@@ -47,8 +45,15 @@ public class ArrayListSolutionQueue implements SolutionQueue {
      */
     public Solution dequeue() {
 
-        //Your code here
-        
+        Solution sol;
+        if(queue.isEmpty() == false){
+            sol =(queue.remove(0));
+        }
+        else{
+            System.out.println("This queue is empty/n");
+            sol = null; 
+        }
+        return sol;
     }
 
     /**
@@ -59,8 +64,7 @@ public class ArrayListSolutionQueue implements SolutionQueue {
      */
     public boolean isEmpty() {
 
-        //Your code here
-        
+        return(queue.size() == 0);     
     }
 
 }
