@@ -4,7 +4,7 @@ import java.util.ArrayList;
 /**
  * The class <b>LightsOut</b> is the
  * class that implements the method to
- * computs solutions of the Lights Out game.
+ * compute solutions of the Lights Out game.
  * It contains the main of our application.
  *
  * @author Guy-Vincent Jourdan, University of Ottawa
@@ -42,8 +42,20 @@ public class LightsOut {
      */
     public static ArrayList<Solution> solve(int width, int height){
 
-        //Your code here
-        
+        ArrayListSolutionQueue partialSolutions;
+        ArrayList<Solution> solutions;
+        Solution sol = new Solution(width, height);
+        partialSolutions.enqueue(sol);
+
+        while(partialSolutions.isEmpty() == false){
+            Solution current = partialSolutions.get(0);
+            if(current.isSuccessful() == true){
+                solutions.add(current);
+            }
+            else{
+
+            }
+        }        
     }
 
     /**
@@ -63,8 +75,16 @@ public class LightsOut {
     public static void main(String[] args) {
 
         StudentInfo.display();
+        int width, height;
 
-        //Your code here
-        
+        if(args == null || !(args instanceof Integer) || (args.size() > 2)){
+            width = 3;
+            height = 3;
+        }
+        else{
+            width = Integer.parseInt(args[0]);
+            height = Integer.parseInt(args[1]);
+        }
+        solve(width, height);
     }
 }
